@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from qlik_sdk import Auth, AuthType, Config
+from qlik_sdk import Auth, AuthType, Config, Apps
 
 # Carrega as variáveis de ambiente
 load_dotenv()

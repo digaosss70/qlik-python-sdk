@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 from qlik_sdk import Apps, AuthType, Config, Qlik
 import json
+
 # Carrega as variáveis de ambiente
 load_dotenv()
 
@@ -30,23 +31,17 @@ sheetListProps = {
       "cells": "/cells",
       "rank": "/rank",
       "columns": "/columns",
-      "rows": "/rows"
+      "rows": "/rows",
+      "creationDate":"/creationDate"
     },
     "qType": "sheet"
   }
 }
 
 with app.open():
-    app_info = app.get_app_layout()
-    print(app_info.qTitle)
-    
+  
     session_obj = app.create_session_object(json.loads(json.dumps(sheetListProps)))
     sheet_list_layout = session_obj.get_layout()
 
-    # LISTAR APENAS ID   
-    # sheet_id_list = [q.qInfo.qId for q in sheet_list_layout.qAppObjectList.qItems]
-    # for sheet_id in sheet_id_list:
-    #     print(f"publishing sheet with id {sheet_id}")
-
     for s in sheet_list_layout.qAppObjectList.qItems:
-        print(f" id {s.qInfo.qId} title {s.qData.title}")
+        print(f" id {s.qInfo.qId} title {s.qData.title} create {s.qData.creationDate}")
