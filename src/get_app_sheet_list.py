@@ -8,7 +8,7 @@ load_dotenv()
 
 QLIK_HIOST = os.getenv("host")
 QLIK_API_KEY = os.getenv("api_key")
-QLIK_APP_ID = os.getenv("app_id")
+QLIK_APP_ID = os.getenv("app_id") 
 
 auth = Apps(Config(host=QLIK_HIOST, auth_type=AuthType.APIKey, api_key=QLIK_API_KEY))
 
@@ -32,7 +32,7 @@ sheetListProps = {
       "rank": "/rank",
       "columns": "/columns",
       "rows": "/rows",
-      "creationDate":"/creationDate"
+      "ownerId": "/qMetaDef/ownerId"
     },
     "qType": "sheet"
   }
@@ -43,5 +43,7 @@ with app.open():
     session_obj = app.create_session_object(json.loads(json.dumps(sheetListProps)))
     sheet_list_layout = session_obj.get_layout()
 
-    for s in sheet_list_layout.qAppObjectList.qItems:
-        print(f" id {s.qInfo.qId} title {s.qData.title} create {s.qData.creationDate}")
+    print(sheet_list_layout)
+
+    #for s in sheet_list_layout.qAppObjectList.qItems:
+        #print(f" id {s.qInfo.qId} title {s.qData.title} up {s.qData.ownerId}")
